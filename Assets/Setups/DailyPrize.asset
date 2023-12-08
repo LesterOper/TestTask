@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1f67f910a140b898ab251cb861a8ab, type: 3}
+  m_Name: DailyPrize
+  m_EditorClassIdentifier: 
+  _dailyPrizes:
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 10
+    dayNum: 1
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 5
+    dayNum: 2
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 10
+    dayNum: 3
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 15
+    dayNum: 4
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 12
+    dayNum: 5
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 11
+    dayNum: 6
+  - _dailyPrizeType: 1
+    icon: {fileID: 21300000, guid: d5809afa1c4358546a38532dbd43e007, type: 3}
+    amount: 20
+    dayNum: 7
