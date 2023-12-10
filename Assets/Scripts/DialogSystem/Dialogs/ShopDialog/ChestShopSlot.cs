@@ -41,7 +41,7 @@ namespace DefaultNamespace.ShopDialog
                 Amount = chestType.GetAttribute<ChestItem>().Amount,
                 MoneyType = MoneyType.TICKET
             });
-            ShopDialog.updateAvailabilityToBuy?.Invoke();
+            EventsInvoker.TriggerEvent("UpdateAvailaibilityToBuy");
         }
     }
 }

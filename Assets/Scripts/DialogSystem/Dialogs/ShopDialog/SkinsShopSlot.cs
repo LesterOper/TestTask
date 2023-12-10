@@ -12,6 +12,16 @@ namespace DefaultNamespace.ShopDialog
         [SerializeField] private SkinType skinType;
         private NonPremItem item;
        
+        private void OnEnable()
+        {
+            EventsInvoker.StartListening("UpdateAvailaibilityToBuy", UpdateAvalabilityToBuy);
+        }
+
+        private void OnDisable()
+        {
+            EventsInvoker.StopListening("UpdateAvailaibilityToBuy", UpdateAvalabilityToBuy);
+        }
+        
         protected override void Start()
         {
             base.Start();
@@ -28,7 +38,6 @@ namespace DefaultNamespace.ShopDialog
             }
             
             UpdateAvalabilityToBuy();
-            ShopDialog.updateAvailabilityToBuy += UpdateAvalabilityToBuy;
         }
 
         private void UpdateAvalabilityToBuy()
@@ -41,14 +50,13 @@ namespace DefaultNamespace.ShopDialog
         protected override void Buy()
         {
             base.Buy();
-            _shopUtils.SetSkinClaimed(true, skinType);
-            ShopDialog.updateAvailabilityToBuy -= UpdateAvalabilityToBuy;
-
+            _shopUtils.SetSkinClaimed(true, skinType); 
             MessageBroker.Default.Publish(new CounterUpdateEvent()
             {
                 Amount = -skinType.GetAttribute<NonPremItem>().Cost,
                 MoneyType = MoneyType.TICKET
             });
+            EventsInvoker.TriggerEvent("UpdateAvailaibilityToBuy");
         }
     }
 }

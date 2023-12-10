@@ -1,4 +1,5 @@
-﻿using Counters;
+﻿using System;
+using Counters;
 using DefaultNamespace.Locations;
 using DefaultNamespace.Utils;
 using TMPro;
@@ -10,10 +11,20 @@ namespace DefaultNamespace.ShopDialog
 {
     public class LocationShopSlot : NonPremShopSlot
     {
-
         [SerializeField] private LocationType _locationType;
         [SerializeField] private GameObject locationIcon;
         private NonPremItem item;
+
+        private void OnEnable()
+        {
+            EventsInvoker.StartListening("UpdateAvailaibilityToBuy", UpdateAvalabilityToBuy);
+        }
+
+        private void OnDisable()
+        {
+            EventsInvoker.StopListening("UpdateAvailaibilityToBuy", UpdateAvalabilityToBuy);
+        }
+
         protected override void Start()
         {
             base.Start();
@@ -32,14 +43,12 @@ namespace DefaultNamespace.ShopDialog
             }
 
             UpdateAvalabilityToBuy();
-            ShopDialog.updateAvailabilityToBuy += UpdateAvalabilityToBuy;
         }
 
         private void UpdateAvalabilityToBuy()
         {
-            buyButton.interactable = _counterUtils.GetMoney(MoneyType.TICKET) >=
-                                     _locationType.GetAttribute<NonPremItem>().Cost && 
-                                     _locationUtils.GetLvlPassed() >= item.NumLvlToUnlock 
+            buyButton.interactable = _counterUtils.GetMoney(MoneyType.TICKET) >= item.Cost 
+                                     && _locationUtils.GetLvlPassed() >= item.NumLvlToUnlock
                                      && !_shopUtils.IsLocationClaimed(_locationType);
             
         }
@@ -48,12 +57,13 @@ namespace DefaultNamespace.ShopDialog
         {
             base.Buy();
             _shopUtils.SetLocationClaimed(true, _locationType);
-            ShopDialog.updateAvailabilityToBuy -= UpdateAvalabilityToBuy;
+
             MessageBroker.Default.Publish(new CounterUpdateEvent()
             {
                 Amount = -_locationType.GetAttribute<NonPremItem>().Cost,
                 MoneyType = MoneyType.TICKET
             });
+            EventsInvoker.TriggerEvent("UpdateAvailaibilityToBuy");
         }
     }
 }

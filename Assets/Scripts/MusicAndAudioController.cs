@@ -23,27 +23,27 @@ namespace DefaultNamespace.Utils
 
         public void SetMusicState()
         {
-            bool isOn = PlayerPrefs.GetInt(MUSIC) == 1;
-            PlayerPrefs.SetInt(MUSIC, !isOn ? 1 : 0);
+            bool isOn = PlayerPrefs.GetInt(MUSIC) == 0;
+            PlayerPrefs.SetInt(MUSIC, !isOn ? 0 : 1);
             OnOffMusic();
         }
         
         public void SetSoundState()
         {
-            bool isOn = PlayerPrefs.GetInt(SOUND) == 1;
-            PlayerPrefs.SetInt(SOUND, !isOn ? 1: 0);
+            bool isOn = PlayerPrefs.GetInt(SOUND) == 0;
+            PlayerPrefs.SetInt(SOUND, !isOn ? 0: 1);
             OnOffSound();
         }
         
         private void OnOffMusic()
         {
-            bool isOn = PlayerPrefs.GetInt(MUSIC) == 1;
+            bool isOn = PlayerPrefs.GetInt(MUSIC) == 0;
             music.volume = isOn ? 1 : 0;
         }
 
         private void OnOffSound()
         {
-            bool isOn = PlayerPrefs.GetInt(SOUND) == 1;
+            bool isOn = PlayerPrefs.GetInt(SOUND) == 0;
             sound.volume = isOn ? 1 : 0;
         }
 

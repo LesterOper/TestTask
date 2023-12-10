@@ -11,7 +11,6 @@ namespace DefaultNamespace.ShopDialog
     {
         private InAppPurchasingController _inAppPurchasingController;
         public static Action<Buy> buyChest;
-        public static Action updateAvailabilityToBuy;
         protected override void Start()
         {
             base.Start();
